@@ -93,8 +93,8 @@ def main():
                 texfile.write(
                     f"""
   %% Layer "{label}"
-  \\pgfdeclareimage[height=\\textheight]{{{id}}}{{{outfile}}}
-  \\begin{{textblock}}{{1}}(0,0)
+  \\pgfdeclareimage[height=0.9\\textheight]{{{id}}}{{{outfile}}}
+  \\begin{{textblock}}{{1}}(0.1,0)
     \\pgfuseimage<{overlay_spec}>{{{id}}}
   \\end{{textblock}}\n"""
                 )
