@@ -32,6 +32,14 @@ def main():
     parser.add_argument(
         "filename", metavar="FILENAME", help="the name of the input SVG file"
     )
+    parser.add_argument(
+        "-i",
+        "--image_height",
+        help="the hight of the included images [0 to 1], defaults to 0.8",
+        default=0.8,
+        metavar="image_height",
+        required=False,
+    )
     args = parser.parse_args()
 
     # Resolve input file path
@@ -93,8 +101,8 @@ def main():
                 texfile.write(
                     f"""
   %% Layer "{label}"
-  \\pgfdeclareimage[height=0.9\\textheight]{{{id}}}{{{outfile}}}
-  \\begin{{textblock}}{{1}}(0.1,0)
+  \\pgfdeclareimage[height={{{args.image_height}}}\\textheight]{{{id}}}{{{outfile}}}
+  \\begin{{textblock}}{{1}}(0.05,0.01)
     \\pgfuseimage<{overlay_spec}>{{{id}}}
   \\end{{textblock}}\n"""
                 )
