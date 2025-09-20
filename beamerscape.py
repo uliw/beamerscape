@@ -84,24 +84,22 @@ def main():
                 print(f"layer id='{id}' label='{label}' overlay_spec='{overlay_spec}'")
 
                 outfile = overlay_path / id
-                subprocess.run(
-                    [
-                        "inkscape",
-                        str(svgfile),
-                        "--export-dpi=200",
-                        "-C",
-                        "-i",
-                        id,
-                        "-j",
-                        f"--export-filename={outfile}.pdf",
-                    ]
-                )
+                subprocess.run([
+                    "inkscape",
+                    str(svgfile),
+                    "--export-dpi=200",
+                    "-C",
+                    "-i",
+                    id,
+                    "-j",
+                    f"--export-filename={outfile}.pdf",
+                ])
 
                 # Create tex for this layer
                 texfile.write(
                     f"""
   %% Layer "{label}"
-  \\pgfdeclareimage[height={{{args.image_height}}}\\textheight]{{{id}}}{{{outfile}}}
+  \\pgfdeclareimage[height={args.image_height}\\textheight]{{{id}}}{{{outfile}}}
   \\begin{{textblock}}{{1}}(0.05,0.01)
     \\pgfuseimage<{overlay_spec}>{{{id}}}
   \\end{{textblock}}\n"""
